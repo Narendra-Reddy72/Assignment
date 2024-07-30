@@ -12,15 +12,17 @@ const EventCalendar = () => {
   useEffect(() => {
     axios.get('http://localhost:4580/api/getAllEvents')
       .then(response => {
-        const events = response.data.data.map(event => ({
+        console.log('Fetched Events:', response.data.data);
+        const mappedEvents = response.data.data.map(event => ({
           id: event._id,
           title: event.title,
           start: new Date(event.date + 'T' + event.time),
-          end: new Date(event.date + 'T' + event.time), 
+          end: new Date(new Date(event.date + 'T' + event.time).getTime() + 60 * 60 * 1000),
           location: event.location,
           description: event.description
         }));
-        setEvents(events.data);
+        console.log('Mapped Events:', mappedEvents);
+        setEvents(mappedEvents);
       })
       .catch(error => {
         console.error('Error fetching events:', error);
@@ -28,14 +30,14 @@ const EventCalendar = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: '100vh' }}>
       <h1>Event Calendar</h1>
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }}
+        style={{ height: '90vh' }}
       />
     </div>
   );

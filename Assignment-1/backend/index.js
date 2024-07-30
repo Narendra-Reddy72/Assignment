@@ -13,16 +13,13 @@ app.use(cors(corsOptions))
 
 app.use(express.json());
 
-const mongourl = "mongodb+srv://mysql:MySQL123@cluster0.uvdfkd5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mongourl = "mongodb+srv://Assignment:Assignment@assignment.kyjjcmg.mongodb.net/?retryWrites=true&w=majority&appName=Assignment";
 
 mongoose.connect(mongourl,{});
 
 mongoose.connection.on('connected',()=>{
     console.log('MongoDB is connected successfully');
 });
-
-const userRoutes = require('./routes/userRoute');
-app.use('/api',userRoutes);
 
 const eventRoutes = require('./routes/eventRoutes')
 app.use('/api',eventRoutes);
