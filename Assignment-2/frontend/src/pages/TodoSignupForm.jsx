@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { create } from '../../../backend/models/todoModel';
 
 function TodoSignupForm(){
 
@@ -21,7 +22,7 @@ function TodoSignupForm(){
     
     return(
         <div>
-            <form>
+            <form onSubmit={createTodo}>
                 <table>
                     <tbody>
                     <tr>
