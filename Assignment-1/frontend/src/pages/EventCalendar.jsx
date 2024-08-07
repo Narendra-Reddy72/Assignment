@@ -14,12 +14,10 @@ const EventCalendar = () => {
       .then(response => {
         console.log('Fetched Events:', response.data.data);
         const mappedEvents = response.data.data.map(event => ({
-          id: event._id,
+
           title: event.title,
-          start: new Date(event.date + 'T' + event.time),
-          end: new Date(new Date(event.date + 'T' + event.time).getTime() + 60 * 60 * 1000),
-          location: event.location,
-          description: event.description
+          start: new Date(event.date),
+          end: new Date(new Date(event.date).getTime() + 60 * 60 * 1000),
         }));
         console.log('Mapped Events:', mappedEvents);
         setEvents(mappedEvents);
