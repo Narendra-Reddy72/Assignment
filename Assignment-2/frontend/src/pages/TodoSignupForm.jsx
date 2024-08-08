@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { create } from '../../../backend/models/todoModel';
 
 function TodoSignupForm(){
 
     const [title,setTitle] = useState('')
     const [description,setDescription]= useState('')
 
-    useEffect(()=>{
-        const createTodo= async()=>{
-            let payload = {title,description}
-            await axios.post(`http://localhost:4800/api/todo/create`,payload)
-                .then((response)=>{
-                    console.log(response.data.data)
-                }).catch((err)=>{
-                    console.log('fecthing error creating data',err)
-                })
-        }
-    createTodo();
-    },[])
+    const createTodos= async(e)=>{
+        e.preventDefault();
+        const payload = {title,description}
+        try{
+            const response = await axios.post(`http://localhost:4800/api/todo/create`,payload)
+                console.log(response.data.data)
+            }catch(err){
+                console.log('fecthing error creating data',err)
+            }
+    }
     
     return(
         <div>
-            <form onSubmit={createTodo}>
+            <form onSubmit={createTodos}>
                 <table>
                     <tbody>
                     <tr>
